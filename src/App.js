@@ -10,7 +10,24 @@ function App() {
   const [error, setError] = useState("");
   const [{ CITIES }, dispatch] = useStateValue();
 
+  useEffect(() => {
+    localStorage.setItem("cities", JSON.stringify(CITIES));
+  }, [CITIES]);
+
   // UPDATE DATA WHERE APP REFRESH OR ADD/DALETE NEW CITY
+
+  const update = async (CITIES) => {
+    CITIES.forEach((element) => {
+      console.log(element);
+      Api.getWeatherFromCity(element.name).then((result) =>
+        dispatch({
+          type: "UPDATE_CITIES",
+          name: element.name,
+          temp: result.main.temp,
+        })
+      );
+    });
+  };
 
   // GET GEOPOSITION
   const [loading, setLoading] = useState(false);
@@ -83,6 +100,7 @@ function App() {
   return (
     <>
       <main>
+        <button onClick={() => update(CITIES)}>UPDATE</button>
         <h3 className="error">{error}</h3>
         {loading && <Spinner />}
         <div className="current-city">

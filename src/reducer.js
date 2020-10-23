@@ -20,10 +20,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         CITIES: state.CITIES.map((city) => {
-          if (city.name === action.name) {
+          if (city.name == action.name) {
             return {
               ...city,
-              temprature: action.temprature,
+              temprature: action.temp,
+            };
+          } else {
+            return {
+              ...city,
             };
           }
         }),
