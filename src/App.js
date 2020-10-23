@@ -12,25 +12,6 @@ function App() {
 
   // UPDATE DATA WHERE APP REFRESH OR ADD/DALETE NEW CITY
 
-  const update = (CITIES) => {
-    console.log("--------------------");
-    CITIES.forEach((element) => {
-      Api.getWeatherFromCity(element?.name)
-        .then((result) => {
-          console.log(result.name, "-", result.main.temp);
-          dispatch({
-            type: "UPDATE_CITIES",
-            name: element.name,
-            temprature: result.main.temp,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-          setError("Can't update cities");
-        });
-    });
-  };
-
   // GET GEOPOSITION
   const [loading, setLoading] = useState(false);
 
@@ -102,7 +83,6 @@ function App() {
   return (
     <>
       <main>
-        <button onClick={() => update(CITIES)}>UPDATE</button>
         <h3 className="error">{error}</h3>
         {loading && <Spinner />}
         <div className="current-city">
