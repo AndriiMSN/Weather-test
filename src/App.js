@@ -12,10 +12,10 @@ function App() {
 
   // UPDATE DATA WHERE APP REFRESH OR ADD/DALETE NEW CITY
 
-  useEffect(() => {
+  const update = (CITIES) => {
     console.log("--------------------");
     CITIES.forEach((element) => {
-      Api.getWeatherFromCity(element.name)
+      Api.getWeatherFromCity(element?.name)
         .then((result) => {
           console.log(result.name, "-", result.main.temp);
           dispatch({
@@ -29,9 +29,7 @@ function App() {
           setError("Can't update cities");
         });
     });
-
-    localStorage.setItem("cities", JSON.stringify(CITIES));
-  }, [CITIES]);
+  };
 
   // GET GEOPOSITION
   const [loading, setLoading] = useState(false);
@@ -104,6 +102,7 @@ function App() {
   return (
     <>
       <main>
+        <button onClick={() => update(CITIES)}>UPDATE</button>
         <h3 className="error">{error}</h3>
         {loading && <Spinner />}
         <div className="current-city">
