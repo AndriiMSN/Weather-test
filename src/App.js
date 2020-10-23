@@ -67,6 +67,7 @@ function App() {
 
   // SEARCH CITY
   const search = () => {
+    setError("");
     if (
       CITIES.filter((city) => city.name.toUpperCase() === query.toUpperCase())
         .length === 0
