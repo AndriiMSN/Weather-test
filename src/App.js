@@ -13,9 +13,11 @@ function App() {
   // UPDATE DATA WHERE APP REFRESH OR ADD/DALETE NEW CITY
 
   useEffect(() => {
+    console.log("--------------------");
     CITIES.forEach((element) => {
       Api.getWeatherFromCity(element.name)
         .then((result) => {
+          console.log(result.name, "-", result.main.temp);
           dispatch({
             type: "UPDATE_CITIES",
             name: element.name,

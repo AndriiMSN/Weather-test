@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
           },
         ],
       };
-    case "UPDATE_CITY":
+    case "UPDATE_CITIES":
       return {
         ...state,
         CITIES: state.CITIES.map((city) => {
